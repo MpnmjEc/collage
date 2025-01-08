@@ -1,5 +1,5 @@
 // Replace with your published Web App URL
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwNaSHYCLN9Q7XDA_VxhUcsRlEEFJeUSM_r674Eji9whW9IDYObQToSB-VCtIgAoLJ31Q/exec";
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwSqLmgw8SIJljfwP2HLUboXNvYGeW-uTqnSFith8_rEC7-xyQ020u_aUrcI6RFYRVUFw/exec";
 
 function getDetail() {
   const phoneNumber       = document.getElementById("phoneNumber").value.trim();
