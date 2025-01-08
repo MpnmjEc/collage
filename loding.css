@@ -1,3 +1,4 @@
+/* <!-- Loader pag ST Css --> */
 .loader {
     position: fixed;
     top: 0;
@@ -8,8 +9,8 @@
     align-items: center;
     justify-content: center;
     background: #333333;
-    transition: opacity 0.75s, visibility 0.75s;
-    z-index: 12;
+    transition: opacity 0.7s, visibility 0.75s;
+    z-index: 11;
   }
   
   .loader--hidden {
@@ -35,4 +36,3 @@
       transform: rotate(1turn);
     }
   }
-  
