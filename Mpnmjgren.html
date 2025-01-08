@@ -2,7 +2,7 @@
 <html>
 <head>
   <base target="_top" />
-  <title>MpnmjEc Portal</title>
+  <title>Portal Green</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap">
   <link rel="stylesheet" href="loding.css">
 
@@ -175,12 +175,14 @@
     <input type="date" id="examDate" placeholder="Enter Roll Number" /><br>
 
     <!-- Buttons -->
-    <button onclick="getDetail()">Get Result</button>
-    <button onclick="printResult()">Print Result</button>
+    <button class="btn btn-success" onclick="getDetail()">Get Result</button>
+    <button class="btn btn-primary"  type="button" name="btnprint" value="Print" onclick="PrintMe('divid')">Print Result</button>
+
     
     <hr>
+    <div id="divid">
     <div id="result"></div>
-    
+  </div>
     <!-- Footer -->
     <div class="footer" id="footerText">
       <a href="https://subeesh-zero.github.io/Profile/">Developer: by Subeesh </a>
@@ -195,7 +197,7 @@
 
   <script>
     // Show typed header text
-    const headerText = "MpnmjEC";
+    const headerText = "M.P.Nachimuthu M.Jaganathan Engineering College";
     const headerElement = document.getElementById("headerText");
 
     function typeHeaderText() {
@@ -286,6 +288,7 @@
   </script>
   <script src="googleScript.js" ></script>
   <script src="loding.js"></script>
+  <script src="print.js"></script>
 </body>
 </html>
 
