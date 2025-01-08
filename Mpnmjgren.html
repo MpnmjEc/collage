@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top" />
+  <title>MpnmjEc Portal</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap">
+  
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- SweetAlert2 CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+  <link rel="loding" href="loding.css">
+  <style>
+    body {
+      font-family: 'PT Sans', Arial, sans-serif;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      text-align: center;
+      margin: 10px;
+      padding: 0;
+    }
+
+    .header {
+      background-color: rgba(255, 255, 255, 0.3);
+      color: Green;
+      padding: 10px;
+      font-size: 24px;
+      backdrop-filter: blur(10px);
+      border-bottom: 2px solid #45a049;
+    }
+
+    .footer {
+      background-color: rgba(255, 255, 255, 0.3);
+      color: Green;
+      padding: 10px;
+      font-size: 18px;
+      backdrop-filter: blur(10px);
+      border-top: 2px solid #45a049;
+    }
+
+    .container {
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 10px;
+      background-color: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 10px;
+      color: black;
+    }
+
+    input,
+    select {
+      padding: 10px;
+      margin: 5px 0;
+      width: 100%;
+      border: 1px solid black;
+      border-radius: 5px;
+      outline: none;
+      background-color: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(5px);
+      color: black;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    hr {
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      margin: 20px 0;
+    }
+
+    #result {
+      margin: 20px;
+      padding: 20px;
+      border-radius: 10px;
+      backdrop-filter: blur(10px);
+      text-align: left;
+    }
+
+    #result span {
+      color: red;
+    }
+
+    .data-box {
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 10px;
+      margin: 10px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+    }
+
+    table.data-box {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    table.data-box td, table.data-box th {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    table.data-box th {
+      background-color: #f2f2f2;
+    }
+
+    table.data-box tbody tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    table.data-box tbody tr:hover {
+      background-color: #ddd;
+    }
+
+    select {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+    }
+
+    select::-ms-expand {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="loader"></div>
+  <div class="header" id="headerText"></div>
+  <div class="container">
+    <center>
+    <div class="logo-container">
+      <img src="https://raw.githubusercontent.com/MpnmjEc/Result/refs/heads/main/icon.png" 
+           alt="Logo" width="150" height="150">
+    </div>
+    </center><br>
+    
+    <!-- Roll Number Field -->
+    <label for="phoneNumber">Enter Roll Number</label>
+    <input type="number" id="phoneNumber" placeholder="Enter Roll Number" />
+
+    <!-- Class Selector -->
+    <label for="sheetSelector">Select Your Class:</label>
+    <select id="sheetSelector">
+      <option value="B-TECH-IT">B-TECH-IT</option>
+      <option value="CSE">CSE</option>
+      <option value="MECH">MECH</option>
+      <option value="ECE">ECE</option>
+      <option value="EEE">Grade 10 (B)</option>
+    </select><br>
+    
+    <!-- Date Field (uses 'date' type for a date picker) -->
+    <label  for="examDate">Select DOB:</label>
+    <input type="date" id="examDate" placeholder="Enter Roll Number" /><br>
+
+    <!-- Buttons -->
+    <button onclick="getDetail()">Get Result</button>
+    <button onclick="printResult()">Print Result</button>
+    
+    <hr>
+    <div id="result"></div>
+    
+    <!-- Footer -->
+    <div class="footer" id="footerText">
+      <a href="https://subeesh-zero.github.io/Profile/">Developer: by Subeesh </a>
+      <h6> Developer Contact: +91 7695958035</h6>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- SweetAlert2 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <script>
+    // Show typed header text
+    const headerText = "MpnmjEC";
+    const headerElement = document.getElementById("headerText");
+
+    function typeHeaderText() {
+      let i = 0;
+      const typingInterval = 100;
+      const delayInterval = 1000;
+
+      function type() {
+        if (i < headerText.length) {
+          headerElement.innerHTML += headerText.charAt(i);
+          i++;
+          setTimeout(type, typingInterval);
+        }
+      }
+      setTimeout(type, delayInterval);
+    }
+    typeHeaderText();
+
+
+    // Fetch and display the result with a SweetAlert2 loading popup
+    function getDetail() {
+      const phoneNumber = document.getElementById("phoneNumber").value;
+      const selectedSheetName = document.getElementById("sheetSelector").value;
+      const selectedDate = document.getElementById("examDate").value;  // YYYY-MM-DD
+      
+      if (!phoneNumber || !selectedSheetName || !selectedDate) {
+        Swal.fire("Error", "Please fill all required fields.", "error");
+        return;
+      }
+
+      // Show loading SweetAlert
+      Swal.fire({
+        title: 'Please wait...',
+        text: 'We are getting your result',
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading();
+        }
+      });
+
+      // Call Apps Script function
+      google.script.run
+        .withSuccessHandler(function(data) {
+          // Close the loading modal
+          Swal.close();
+          // Display the result
+          document.getElementById("result").innerHTML = data;
+        })
+        .withFailureHandler(function(err) {
+          Swal.fire("Error", "Something went wrong: " + err.message, "error");
+        })
+        .submitDT(phoneNumber, selectedSheetName, selectedDate);
+    }
+
+    // Print only the result section in an A4 format
+    function printResult() {
+      var printContents = document.getElementById("result").innerHTML;
+      var originalContents = document.body.innerHTML;
+      document.body.innerHTML = printContents;
+
+      // Apply CSS for printing
+      var style = document.createElement("style");
+      style.innerHTML = `
+        @page {
+          size: A4;
+          margin: 0;
+        }
+        body {
+          margin: 0;
+          font-size: 12px;
+        }
+        table {
+          width: 100%;
+          border-collapse: collapse;
+        }
+        td, th {
+          border: 1px solid black;
+          padding: 8px;
+        }
+      `;
+      document.head.appendChild(style);
+
+      window.print();
+
+      // Restore original contents
+      document.body.innerHTML = originalContents;
+    }
+  </script>
+  <script src="googleScript.js" ></script>
+  <script src="loding.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
